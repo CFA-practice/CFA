@@ -1,892 +1,1228 @@
-<!DOCTYPE html><!-- 让浏览器得知自己处理的是html -->
-<html lang="en">
-
-<!--对文本进行操作	-->
-<!--a表示创建超链接，href是链接到的那个东西，target选择新开网页打开链接或者在原网页打开-->
-<!--b表示粗体  em表示斜体  s表示删除线-->
-
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
 <head>
-<!--提供有关文档内容和标注信息-->
-<meta charset="utf-8"/>
-<title>EDLCV</title>
-<!--有head必须有title-->
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Webflow" name="generator"/>
-<link href=".\css\CVPR2020.css" rel="stylesheet" type="text/css"/>
-<!--链接一个css--> 
-<script src=".\css\CVPR2020.js" type="text/javascript"></script> 
-<script type="text/javascript">WebFont.load({  google: {    families: ["Roboto:300,regular,500","Roboto Condensed:300,regular,700"," Roboto Slab:300,regular,700","Arbutus Slab:regular"]  }});</script> 
-<script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 15">
+<meta name=Originator content="Microsoft Word 15">
+<link rel=File-List href="TPAMI2017_SI_files/filelist.xml">
+<link rel=Edit-Time-Data href="TPAMI2017_SI_files/editdata.mso">
+<title>CEFRL: Compact and Efficient Feature Representation and Learning</title>
+<link rel=themeData href="TPAMI2017_SI_files/themedata.thmx">
+<link rel=colorSchemeMapping href="TPAMI2017_SI_files/colorschememapping.xml">
+<style>
+<!--
+/* Font Definitions */
+@font-face {
+    font-family: Wingdings;
+    panose-1: 5 0 0 0 0 0 0 0 0 0;
+    mso-font-charset: 2;
+    mso-generic-font-family: auto;
+    mso-font-pitch: variable;
+    mso-font-signature: 0 268435456 0 0 -2147483648 0;
+}
+@font-face {
+    font-family: SimSun;
+    panose-1: 2 1 6 0 3 1 1 1 1 1;
+    mso-font-alt: SimSun;
+    mso-font-charset: 134;
+    mso-generic-font-family: auto;
+    mso-font-pitch: variable;
+    mso-font-signature: 3 680460288 22 0 262145 0;
+}
+@font-face {
+    font-family: "Cambria Math";
+    panose-1: 2 4 5 3 5 4 6 3 2 4;
+    mso-font-charset: 1;
+    mso-generic-font-family: roman;
+    mso-font-format: other;
+    mso-font-pitch: variable;
+    mso-font-signature: 0 0 0 0 0 0;
+}
+@font-face {
+    font-family: Calibri;
+    panose-1: 2 15 5 2 2 2 4 3 2 4;
+    mso-font-charset: 0;
+    mso-generic-font-family: swiss;
+    mso-font-pitch: variable;
+    mso-font-signature: -536870145 1073786111 1 0 415 0;
+}
+@font-face {
+    font-family: Tahoma;
+    panose-1: 2 11 6 4 3 5 4 4 2 4;
+    mso-font-charset: 0;
+    mso-generic-font-family: swiss;
+    mso-font-pitch: variable;
+    mso-font-signature: -520081665 -1073717157 41 0 66047 0;
+}
+@font-face {
+    font-family: "Comic Sans MS";
+    panose-1: 3 15 7 2 3 3 2 2 2 4;
+    mso-font-charset: 0;
+    mso-generic-font-family: script;
+    mso-font-pitch: variable;
+    mso-font-signature: 647 1073741843 0 0 159 0;
+}
+@font-face {
+    font-family: SimSun;
+    panose-1: 2 1 6 0 3 1 1 1 1 1;
+    mso-font-charset: 134;
+    mso-generic-font-family: auto;
+    mso-font-pitch: variable;
+    mso-font-signature: 3 680460288 22 0 262145 0;
+}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal {
+    mso-style-unhide: no;
+    mso-style-qformat: yes;
+    mso-style-parent: "";
+    margin: 0cm;
+    margin-bottom: .0001pt;
+    mso-pagination: widow-orphan;
+    font-size: 12.0pt;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    color: black;
+}
+h1 {
+    mso-style-priority: 9;
+    mso-style-unhide: no;
+    mso-style-qformat: yes;
+    mso-style-link: "Heading 1 Char";
+    mso-margin-top-alt: auto;
+    margin-right: 0cm;
+    mso-margin-bottom-alt: auto;
+    margin-left: 0cm;
+    mso-pagination: widow-orphan;
+    mso-outline-level: 1;
+    font-size: 24.0pt;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    color: black;
+    font-weight: bold;
+}
+h2 {
+    mso-style-priority: 9;
+    mso-style-unhide: no;
+    mso-style-qformat: yes;
+    mso-style-link: "Heading 2 Char";
+    mso-margin-top-alt: auto;
+    margin-right: 0cm;
+    mso-margin-bottom-alt: auto;
+    margin-left: 0cm;
+    mso-pagination: widow-orphan;
+    mso-outline-level: 2;
+    font-size: 18.0pt;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    color: black;
+    font-weight: bold;
+}
+p.MsoHeader, li.MsoHeader, div.MsoHeader {
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-link: "Header Char";
+    margin: 0cm;
+    margin-bottom: .0001pt;
+    mso-pagination: widow-orphan;
+    tab-stops: center 216.0pt right 432.0pt;
+    font-size: 12.0pt;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    color: black;
+}
+p.MsoFooter, li.MsoFooter, div.MsoFooter {
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-link: "Footer Char";
+    margin: 0cm;
+    margin-bottom: .0001pt;
+    mso-pagination: widow-orphan;
+    tab-stops: center 216.0pt right 432.0pt;
+    font-size: 12.0pt;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    color: black;
+}
+a:link, span.MsoHyperlink {
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    color: #0000CC;
+    mso-text-animation: none;
+    text-decoration: none;
+    text-underline: none;
+    text-decoration: none;
+    text-line-through: none;
+}
+a:visited, span.MsoHyperlinkFollowed {
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    color: #660033;
+    mso-text-animation: none;
+    text-decoration: none;
+    text-underline: none;
+    text-decoration: none;
+    text-line-through: none;
+}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText {
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-link: "Plain Text Char";
+    margin: 0cm;
+    margin-bottom: .0001pt;
+    mso-pagination: widow-orphan;
+    font-size: 12.0pt;
+    font-family: "Arial", sans-serif;
+    mso-fareast-font-family: SimSun;
+    color: windowtext;
+    mso-fareast-language: EN-US;
+    mso-bidi-language: EN-US;
+}
+p {
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-margin-top-alt: auto;
+    margin-right: 0cm;
+    mso-margin-bottom-alt: auto;
+    margin-left: 0cm;
+    mso-pagination: widow-orphan;
+    font-size: 12.0pt;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    color: black;
+}
+tt {
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    font-family: "Courier New";
+    mso-ascii-font-family: "Courier New";
+    mso-fareast-font-family: "Times New Roman";
+    mso-hansi-font-family: "Courier New";
+    mso-bidi-font-family: "Courier New";
+}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate {
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-link: "Balloon Text Char";
+    margin: 0cm;
+    margin-bottom: .0001pt;
+    mso-pagination: widow-orphan;
+    font-size: 8.0pt;
+    font-family: "Tahoma", sans-serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    color: windowtext;
+}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph {
+    mso-style-noshow: yes;
+    mso-style-priority: 34;
+    mso-style-unhide: no;
+    mso-style-qformat: yes;
+    margin-top: 0cm;
+    margin-right: 0cm;
+    margin-bottom: 10.0pt;
+    margin-left: 36.0pt;
+    mso-add-space: auto;
+    line-height: 115%;
+    mso-pagination: widow-orphan;
+    font-size: 11.0pt;
+    font-family: "Calibri", sans-serif;
+    mso-ascii-font-family: Calibri;
+    mso-ascii-theme-font: minor-latin;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    mso-hansi-font-family: Calibri;
+    mso-hansi-theme-font: minor-latin;
+    mso-bidi-font-family: "Times New Roman";
+    mso-bidi-theme-font: minor-bidi;
+    color: windowtext;
+}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst {
+    mso-style-noshow: yes;
+    mso-style-priority: 34;
+    mso-style-unhide: no;
+    mso-style-qformat: yes;
+    mso-style-type: export-only;
+    margin-top: 0cm;
+    margin-right: 0cm;
+    margin-bottom: 0cm;
+    margin-left: 36.0pt;
+    margin-bottom: .0001pt;
+    mso-add-space: auto;
+    line-height: 115%;
+    mso-pagination: widow-orphan;
+    font-size: 11.0pt;
+    font-family: "Calibri", sans-serif;
+    mso-ascii-font-family: Calibri;
+    mso-ascii-theme-font: minor-latin;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    mso-hansi-font-family: Calibri;
+    mso-hansi-theme-font: minor-latin;
+    mso-bidi-font-family: "Times New Roman";
+    mso-bidi-theme-font: minor-bidi;
+    color: windowtext;
+}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle {
+    mso-style-noshow: yes;
+    mso-style-priority: 34;
+    mso-style-unhide: no;
+    mso-style-qformat: yes;
+    mso-style-type: export-only;
+    margin-top: 0cm;
+    margin-right: 0cm;
+    margin-bottom: 0cm;
+    margin-left: 36.0pt;
+    margin-bottom: .0001pt;
+    mso-add-space: auto;
+    line-height: 115%;
+    mso-pagination: widow-orphan;
+    font-size: 11.0pt;
+    font-family: "Calibri", sans-serif;
+    mso-ascii-font-family: Calibri;
+    mso-ascii-theme-font: minor-latin;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    mso-hansi-font-family: Calibri;
+    mso-hansi-theme-font: minor-latin;
+    mso-bidi-font-family: "Times New Roman";
+    mso-bidi-theme-font: minor-bidi;
+    color: windowtext;
+}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast {
+    mso-style-noshow: yes;
+    mso-style-priority: 34;
+    mso-style-unhide: no;
+    mso-style-qformat: yes;
+    mso-style-type: export-only;
+    margin-top: 0cm;
+    margin-right: 0cm;
+    margin-bottom: 10.0pt;
+    margin-left: 36.0pt;
+    mso-add-space: auto;
+    line-height: 115%;
+    mso-pagination: widow-orphan;
+    font-size: 11.0pt;
+    font-family: "Calibri", sans-serif;
+    mso-ascii-font-family: Calibri;
+    mso-ascii-theme-font: minor-latin;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    mso-hansi-font-family: Calibri;
+    mso-hansi-theme-font: minor-latin;
+    mso-bidi-font-family: "Times New Roman";
+    mso-bidi-theme-font: minor-bidi;
+    color: windowtext;
+}
+span.Heading1Char {
+    mso-style-name: "Heading 1 Char";
+    mso-style-priority: 9;
+    mso-style-unhide: no;
+    mso-style-locked: yes;
+    mso-style-link: "Heading 1";
+    mso-ansi-font-size: 16.0pt;
+    mso-bidi-font-size: 16.0pt;
+    font-family: "Calibri Light", sans-serif;
+    mso-ascii-font-family: "Calibri Light";
+    mso-ascii-theme-font: major-latin;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: major-fareast;
+    mso-hansi-font-family: "Calibri Light";
+    mso-hansi-theme-font: major-latin;
+    mso-bidi-font-family: "Times New Roman";
+    mso-bidi-theme-font: major-bidi;
+    color: #2E74B5;
+    mso-themecolor: accent1;
+    mso-themeshade: 191;
+}
+span.Heading2Char {
+    mso-style-name: "Heading 2 Char";
+    mso-style-noshow: yes;
+    mso-style-priority: 9;
+    mso-style-unhide: no;
+    mso-style-locked: yes;
+    mso-style-link: "Heading 2";
+    mso-ansi-font-size: 13.0pt;
+    mso-bidi-font-size: 13.0pt;
+    font-family: "Calibri Light", sans-serif;
+    mso-ascii-font-family: "Calibri Light";
+    mso-ascii-theme-font: major-latin;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: major-fareast;
+    mso-hansi-font-family: "Calibri Light";
+    mso-hansi-theme-font: major-latin;
+    mso-bidi-font-family: "Times New Roman";
+    mso-bidi-theme-font: major-bidi;
+    color: #2E74B5;
+    mso-themecolor: accent1;
+    mso-themeshade: 191;
+}
+span.HeaderChar {
+    mso-style-name: "Header Char";
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-unhide: no;
+    mso-style-locked: yes;
+    mso-style-link: Header;
+    mso-ansi-font-size: 12.0pt;
+    mso-bidi-font-size: 12.0pt;
+    font-family: "Times New Roman", serif;
+    mso-ascii-font-family: "Times New Roman";
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    mso-hansi-font-family: "Times New Roman";
+    mso-bidi-font-family: "Times New Roman";
+    color: black;
+}
+span.FooterChar {
+    mso-style-name: "Footer Char";
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-unhide: no;
+    mso-style-locked: yes;
+    mso-style-link: Footer;
+    mso-ansi-font-size: 12.0pt;
+    mso-bidi-font-size: 12.0pt;
+    font-family: "Times New Roman", serif;
+    mso-ascii-font-family: "Times New Roman";
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    mso-hansi-font-family: "Times New Roman";
+    mso-bidi-font-family: "Times New Roman";
+    color: black;
+}
+span.PlainTextChar {
+    mso-style-name: "Plain Text Char";
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-unhide: no;
+    mso-style-locked: yes;
+    mso-style-link: "Plain Text";
+    mso-ansi-font-size: 12.0pt;
+    mso-bidi-font-size: 12.0pt;
+    font-family: "Arial", sans-serif;
+    mso-ascii-font-family: Arial;
+    mso-fareast-font-family: SimSun;
+    mso-hansi-font-family: Arial;
+    mso-bidi-font-family: Arial;
+    mso-fareast-language: EN-US;
+    mso-bidi-language: EN-US;
+}
+span.BalloonTextChar {
+    mso-style-name: "Balloon Text Char";
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-unhide: no;
+    mso-style-locked: yes;
+    mso-style-link: "Balloon Text";
+    mso-ansi-font-size: 8.0pt;
+    mso-bidi-font-size: 8.0pt;
+    font-family: "Tahoma", sans-serif;
+    mso-ascii-font-family: Tahoma;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    mso-hansi-font-family: Tahoma;
+    mso-bidi-font-family: Tahoma;
+    mso-ansi-language: FI;
+}
+p.g, li.g, div.g {
+    mso-style-name: g;
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-unhide: no;
+    margin-top: 12.0pt;
+    margin-right: 0cm;
+    margin-bottom: 12.0pt;
+    margin-left: 0cm;
+    mso-pagination: widow-orphan;
+    font-size: 12.0pt;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    color: black;
+}
+p.j, li.j, div.j {
+    mso-style-name: j;
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-unhide: no;
+    mso-margin-top-alt: auto;
+    margin-right: 0cm;
+    mso-margin-bottom-alt: auto;
+    margin-left: 0cm;
+    mso-pagination: widow-orphan;
+    font-size: 12.0pt;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    color: black;
+}
+p.j1, li.j1, div.j1 {
+    mso-style-name: j1;
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-unhide: no;
+    mso-margin-top-alt: auto;
+    margin-right: 0cm;
+    mso-margin-bottom-alt: auto;
+    margin-left: 0cm;
+    line-height: 120%;
+    mso-pagination: widow-orphan;
+    font-size: 12.0pt;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    color: black;
+}
+p.Default, li.Default, div.Default {
+    mso-style-name: Default;
+    mso-style-noshow: yes;
+    mso-style-priority: 99;
+    mso-style-unhide: no;
+    mso-style-parent: "";
+    margin: 0cm;
+    margin-bottom: .0001pt;
+    mso-pagination: none;
+    mso-layout-grid-align: none;
+    text-autospace: none;
+    font-size: 12.0pt;
+    font-family: "Calibri", sans-serif;
+    mso-fareast-font-family: "Times New Roman";
+    mso-fareast-theme-font: minor-fareast;
+    mso-bidi-font-family: "Times New Roman";
+    color: black;
+}
+span.nav {
+    mso-style-name: nav;
+    mso-style-unhide: no;
+}
+span.mainnote {
+    mso-style-name: mainnote;
+    mso-style-unhide: no;
+}
+span.cit-in-place-nohover {
+    mso-style-name: cit-in-place-nohover;
+    mso-style-unhide: no;
+}
+span.biblio-title {
+    mso-style-name: biblio-title;
+    mso-style-unhide: no;
+}
+span.go {
+    mso-style-name: go;
+    mso-style-unhide: no;
+}
+span.style91 {
+    mso-style-name: style91;
+    mso-style-unhide: no;
+}
+span.institution {
+    mso-style-name: institution;
+    mso-style-unhide: no;
+}
+span.GramE {
+    mso-style-name: "";
+    mso-gram-e: yes;
+}
+.MsoChpDefault {
+    mso-style-type: export-only;
+    mso-default-props: yes;
+    font-size: 10.0pt;
+    mso-ansi-font-size: 10.0pt;
+    mso-bidi-font-size: 10.0pt;
+}
+@page WordSection1 {
+    size: 21.0cm 841.95pt;
+    margin: 36.0pt 36.0pt 36.0pt 36.0pt;
+    mso-header-margin: 36.0pt;
+    mso-footer-margin: 36.0pt;
+    mso-paper-source: 0;
+}
+div.WordSection1 {
+    page: WordSection1;
+}
+ /* List Definitions */
+ @list l0 {
+mso-list-id:59985435;
+mso-list-type:hybrid;
+mso-list-template-ids:-692133702 -878914918 67829763 67829765 67829761 67829763 67829765 67829761 67829763 67829765;
+}
+@list l0:level1 {
+mso-level-number-format:bullet;
+mso-level-text:\F0B7;
+mso-level-tab-stop:none;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+font-family:Symbol;
+color:black;
+mso-themecolor:text1;
+mso-style-textfill-fill-color:black;
+mso-style-textfill-fill-themecolor:text1;
+mso-style-textfill-fill-alpha:100.0%;
+}
+@list l0:level2 {
+mso-level-number-format:bullet;
+mso-level-text:o;
+mso-level-tab-stop:none;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+font-family:"Courier New";
+}
+@list l0:level3 {
+mso-level-number-format:bullet;
+mso-level-text:\F0A7;
+mso-level-tab-stop:none;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+font-family:Wingdings;
+}
+@list l0:level4 {
+mso-level-number-format:bullet;
+mso-level-text:\F0B7;
+mso-level-tab-stop:none;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+font-family:Symbol;
+}
+@list l0:level5 {
+mso-level-number-format:bullet;
+mso-level-text:o;
+mso-level-tab-stop:none;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+font-family:"Courier New";
+}
+@list l0:level6 {
+mso-level-number-format:bullet;
+mso-level-text:\F0A7;
+mso-level-tab-stop:none;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+font-family:Wingdings;
+}
+@list l0:level7 {
+mso-level-number-format:bullet;
+mso-level-text:\F0B7;
+mso-level-tab-stop:none;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+font-family:Symbol;
+}
+@list l0:level8 {
+mso-level-number-format:bullet;
+mso-level-text:o;
+mso-level-tab-stop:none;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+font-family:"Courier New";
+}
+@list l0:level9 {
+mso-level-number-format:bullet;
+mso-level-text:\F0A7;
+mso-level-tab-stop:none;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+font-family:Wingdings;
+}
+@list l1 {
+mso-list-id:2016491199;
+mso-list-template-ids:-568701332;
+}
+@list l1:level1 {
+mso-level-number-format:bullet;
+mso-level-text:\F0B7;
+mso-level-tab-stop:36.0pt;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+font-family:Symbol;
+}
+@list l1:level2 {
+mso-level-tab-stop:72.0pt;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+}
+@list l1:level3 {
+mso-level-tab-stop:108.0pt;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+}
+@list l1:level4 {
+mso-level-tab-stop:144.0pt;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+}
+@list l1:level5 {
+mso-level-tab-stop:180.0pt;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+}
+@list l1:level6 {
+mso-level-tab-stop:216.0pt;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+}
+@list l1:level7 {
+mso-level-tab-stop:252.0pt;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+}
+@list l1:level8 {
+mso-level-tab-stop:288.0pt;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+}
+@list l1:level9 {
+mso-level-tab-stop:324.0pt;
+mso-level-number-position:left;
+text-indent:-18.0pt;
+}
+ol {
+    margin-bottom: 0cm;
+}
+ul {
+    margin-bottom: 0cm;
+}
+-->
+</style>
+<meta http-equiv=Content-Language content=en-us>
 </head>
 
-<body>
-<div data-collapse="medium" data-animation="default" data-duration="400" class="navigation w-hidden-main w-nav">
-  <div class="w-container"><a href="#" class="brand-link w-nav-brand">
-    <div class="logo-text">EDLCV 2020</div>
-    </a>
-    <nav role="navigation" class="nav-menu w-nav-menu"> <a href="#topics" class="nav-link w-nav-link">Topics</a> <a href="#dates" class="nav-link w-nav-link">Dates</a> <a href="#speakers" class="nav-link w-nav-link">Speakers</a> <a href="#submission" class="nav-link w-nav-link">Submission</a> <a href="#program2" class="nav-link w-nav-link">Program</a> <a href="#awards" class="nav-link w-nav-link">Awards</a> <a href="#organizers" class="nav-link w-nav-link">Organizers</a> </nav>
-    <div class="nav-link menu w-nav-button">
-      <div class="w-icon-nav-menu"></div>
-    </div>
-  </div>
-</div>
-<div data-collapse="medium" data-animation="default" data-duration="400" class="navigation w-nav">
-  <div class="w-container"><a href="#" class="brand-link w-nav-brand">
-    <div class="logo-text">EDLCV 2020</div>
-    </a>
-    <nav role="navigation" class="nav-menu w-nav-menu"> <a href="#dates" class="nav-link w-nav-link">Dates</a> <a href="#topics" class="nav-link w-nav-link">Topics</a> <a href="#speakers" class="nav-link w-nav-link">Speakers</a> <a href="#program" class="nav-link w-nav-link">Program</a> <a href="#submission2" class="nav-link w-nav-link">Submission</a> <a href="#organizers" class="nav-link w-nav-link">Organizers</a> <a href="#awards2" class="nav-link w-nav-link">Previous</a> </nav>
-  </div>
-</div>
-<div data-animation="slide" data-duration="500" data-infinite="1" class="slider w-slider">
-  <div class="w-slider-mask">
-    <div class="slide _1 w-slide">
-      <div class="w-container"></div>
-    </div>
-    <div class="slide _2 w-slide">
-      <div class="w-container"></div>
-    </div>
-    <div class="slide _3 w-slide">
-      <div class="w-container"></div>
-    </div>
-  </div>
-  <div class="w-slider-arrow-left">
-    <div class="w-icon-slider-left"></div>
-  </div>
-  <div class="w-slider-arrow-right">
-    <div class="w-icon-slider-right"></div>
-  </div>
-  <div class="w-slider-nav w-round"></div>
-</div>
-<div class="section main w-hidden-small w-hidden-tiny">
-  <div class="container w-container">
-    <h1 class="main-heading">Joint Workshop on <br/>
-      Efficient Deep Learning in Computer Vision</h1>
-    <div class="text-block-7">June 15th, 2020 <br/>
-      Seattle, Washington <br/>
-      in conjunction with <a href="http://cvpr2020.thecvf.com/"  class="link">CVPR 2020</a></div>
-  </div>
-</div>
-<div class="section main w-hidden-main w-hidden-medium">
-  <div class="container w-container">
-    <h1 class="main-heading">Joint Workshop on <br/>
-      Efficient Deep Learning in Computer Vision <br/>
-    </h1>
-    <div class="text-block-7">June 15th, 2020<br/>
-      Seattle, Washington <br/>
-      in conjunction with <a href="http://cvpr2020.thecvf.com/" class="link">CVPR 2020</a></div>
-  </div>
-</div>
-<div class="section-10 w-hidden-small w-hidden-tiny">
-  <div class="w-container">
-    <div>
-      <div class="text-block-8">Computer Vision has a long history of academic research, and recent advances in deep learning have provided significant improvements in the ability to understand visual content. As a result of these research advances on problems such as object classification, object detection, and image segmentation, there has been a rapid increase in the adoption of Computer Vision in industry; however, mainstream Computer Vision research has given little consideration to speed or computation time, and even less to constraints such as power/energy, memory footprint and model size. The workshop has three main goals on solving and discussing efficiency in Computer Vision: <br/>
-        <br/>
-        First, the workshop aims to create a venue for a consideration of the new generation of problems that arise as Computer Vision meets mobile and AR/VR systems constraints, to bring together researchers, educators and practitioners who are interested in techniques as well as applications of compact, efficient neural network representations. The workshop discussions will establish close connection between researchers in machine learning and computer vision communities and engineers in industry, and to benefit both academic researchers as well as industrial practitioners. <br/>
-        <br/>
-        Second, the workshop aims at reproducibility and comparability of methods for compact and efficient neural network representations, and on-device machine learning. Thus a set of benchmarking tasks (image classification, visual question answering) will be provided together with defined data sets, in order to compare the performance of neural network compression methods on the same networks. Submissions are encouraged (but not required) to use these tasks and data sets in their work. Also, contributors are encouraged to make their code available. <br/>
-        <br/>
-        Third, the workshop aims to discuss the next steps in developing efficient feature representations from three aspects: energy efficient, label efficient, and sample efficient. Despite DNNs are brain-inspired and can achieve or even surpass human-level performance on a variety of challenging computer vision tasks, they continue to trail humans’ abilities in many aspects, such as high energy-efficiency and the ability to perform low-shot learning (learning novel concepts from very few examples). Therefore, the next generation of feature representation and learning techniques should aim to tackle recognition tasks with significantly reduced computational complexity, using as little training data as people need, and to generalize to a range of different tasks beyond the one task the model was trained on. </div>
-    </div>
-  </div>
-</div>
-<div class="section-2 w-hidden-main w-hidden-medium">
-  <div class="w-container">
-    <div>
-      <div class="text-block-12 w-hidden-main w-hidden-medium">Computer Vision has a long history of academic research, and recent advances in deep learning have provided significant improvements in the ability to understand visual content. As a result of these research advances on problems such as object classification, object detection, and image segmentation, there has been a rapid increase in the adoption of Computer Vision in industry; however, mainstream Computer Vision research has given little consideration to speed or computation time, and even less to constraints such as power/energy, memory footprint and model size. The workshop has three main goals on solving and discussing efficiency in Computer Vision: <br/>
-        First, the workshop aims to create a venue for a consideration of the new generation of problems that arise as Computer Vision meets mobile and AR/VR systems constraints, to bring together researchers, educators and practitioners who are interested in techniques as well as applications of compact, efficient neural network representations. The workshop discussions will establish close connection between researchers in machine learning and computer vision communities and engineers in industry, and to benefit both academic researchers as well as industrial practitioners. <br/>
-        Second, the workshop aims at reproducibility and comparability of methods for compact and efficient neural network representations, and on-device machine learning. Thus a set of benchmarking tasks (image classification, visual question answering) will be provided together with defined data sets, in order to compare the performance of neural network compression methods on the same networks. Submissions are encouraged (but not required) to use these tasks and data sets in their work. Also, contributors are encouraged to make their code available. <br/>
-        Third, the workshop aims to discuss the next steps in developing efficient feature representations from three aspects: energy efficient, label efficient, and sample efficient. Despite DNNs are brain-inspired and can achieve or even surpass human-level performance on a variety of challenging computer vision tasks, they continue to trail humans’ abilities in many aspects, such as high energy-efficiency and the ability to perform low-shot learning (learning novel concepts from very few examples). Therefore, the next generation of feature representation and learning techniques should aim to tackle recognition tasks with significantly reduced computational complexity, using as little training data as people need, and to generalize to a range of different tasks beyond the one task the model was trained on. <br/>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="dates" class="section purple w-hidden-small w-hidden-tiny">
-  <div class="w-container">
-    <h2 class="heading-3">Important Dates</h2>
-    <div>
-      <div class="w-row">
-        <div class="column-2 w-col w-col-5">
-          <div class="text-block-9"><strong class="bold-text-3">Paper Submission Deadline:</strong></div>
-          <div><strong class="bold-text-4">Notification to authors:</strong></div>
-          <div class="text-block-10"><strong class="bold-text-5">Camera ready deadline:</strong></div>
-          <div><strong class="bold-text-6">Workshop:</strong></div>
-        </div>
-        <div class="column-3 w-clearfix w-col w-col-7">
-          <div class="text-block-5"><strong class="bold-text-8">March 25, 2020 pst</strong></div>
-          <div class="text-block-6 w-clearfix"><strong class="bold-text-9">April 12, 2020 pst</strong></div>
-          <div><strong class="bold-text-2">April 19, 2020 pst</strong></div>
-          <div><strong class="bold-text-2">June 15, 2020 (Full Day)</strong></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="dates" class="section purple w-hidden-main w-hidden-medium">
-  <div class="w-container">
-    <h2 class="heading-3">Important Dates</h2>
-    <div class="row-3 w-row">
-      <div class="w-col w-col-6">
-        <div><strong class="bold-text-3">Paper Submission Deadline:</strong></div>
-        <div><strong class="bold-text-4">Notification to authors:</strong></div>
-        <div><strong class="bold-text-5">Camera ready deadline:</strong></div>
-        <div><strong class="bold-text-6">Workshop:</strong></div>
-      </div>
-      <div class="w-col w-col-6">
-        <div class="text-block-16"><strong class="bold-text-12"> March 25, 2020 pst</strong></div>
-        <div><strong class="bold-text-3">April 12, 2020 pst</strong></div>
-        <div><strong class="bold-text-3">April 19, 2020 pst</strong></div>
-        <div><strong class="bold-text-3">June 15, 2020 (Full Day)</strong></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="topics" class="section-8">
-  <div class="container-4 w-container">
-    <h2 class="heading-11">Topics</h2>
-    <div class="section-subtitle">
-      <ul>
-        <li><strong>Efficient Neural Network and Architecture Search</strong></li>
-        <ul>
-          <li>Compact and efficient neural network architecture for mobile and AR/VR devices</li>
-          <li>Hardware (latency, energy) aware neural network architectures search, targeted for mobile and AR/VR devices</li>
-          <li>Efficient architecture search algorithm for different vision tasks (detection, segmentation etc.)</li>
-          <li>Optimization for Latency, Accuracy and Memory usage, as motivated by embedded devices</li>
-        </ul>
-        <li><strong>Neural Network Compression</strong></li>
-        <ul>
-          <li>Model compression (sparsification, binarization, quantization, pruning, thresholding and coding etc.) for efficient inference with deep networks and other ML models</li>
-          <li>Scalable compression techniques that can cope with large amounts of data and/or large neural networks (<em>e.g.</em>, not requiring access to complete datasets for hyperparameter tuning and/or retraining)</li>
-          <li>Hashing (Binary) Codes Learning</li>
-        </ul>
-        <li><strong>Low-bit Quantization Network and Hardware Accelerators</strong></li>
-        <ul>
-          <li>Investigations into the processor architectures (CPU vs GPU vs DSP) that best support mobile applications</li>
-          <li>Hardware accelerators to support Computer Vision on mobile and AR/VR platforms</li>
-          <li>Low-precision training/inference & acceleration of deep neural networks on mobile devices</li>
-        </ul>
-        <li><strong>Dataset and benchmark</strong></li>
-        <ul>
-          <li>Open datasets and test environments for benchmarking inference with efficient DNN representations</li>
-          <li>Metrics for evaluating the performance of efficient DNN representations</li>
-          <li>Methods for comparing efficient DNN inference across platforms and tasks</li>
-        </ul>
-        <li><strong>Label/sample/feature efficient learning</strong></li>
-        <ul>
-          <li>Label Efficient Feature Representation Learning Methods, <em>e.g.</em> Unsupervised Learning, Domain Adaptation, Weakly Supervised Learning and SelfSupervised Learning Approaches</li>
-          <li>Sample Efficient Feature Learning Methods, <em>e.g.</em> Meta Learning</li>
-          <li>Low Shot learning Techniques</li>
-          <li>New Applications, <em>e.g.</em> Medical Domain</li>
-        </ul>
-        <li><strong>Mobile and AR/VR Applications</strong></li>
-        <ul>
-          <li>Novel mobile and AR/VR applications using Computer Vision such as image processing (<em>e.g.</em> style transfer, body tracking, face tracking) and augmented reality</li>
-          <li>Learning efficient deep neural networks under memory and computation constraints for on-device applications</li>
-        </ul>
-      </ul>
-    </div>
-  </div>
-</div>
-<div id="speakers" class="section-3 w-hidden-small w-hidden-tiny">
-  <div class="w-container">
-    <h2 class="heading-5">Keynote Speakers</h2>
-    <div>
-      <div class="row w-row">
-        <div class="column w-col w-col-3"><a href="" class="w-inline-block"><img src="pictures/diana.png" width="64" alt="" class="person"/>
-          <h1 class="heading">Prof. Diana Marculescu<br/>
-            CMU</h1>
-          </a></div>
-        <div class="w-col w-col-9">
-          <div class="text-block-3">Title: <strong>Putting the “Machine” Back in Machine Learning: The Case for Hardware-ML Model Co-design <!--(--></strong><!--<a target="_blank" href="" class="link-13"><strong>Slides</strong></a><strong>)</strong><br/>--> 
-			  <br/>
-			 Abstract: Machine learning (ML) applications have entered and impacted our lives unlike any other technology advance from the recent past. While the holy grail for judging the quality of a ML model has largely been serving accuracy, and only recently its resource usage, neither of these metrics translate directly to energy efficiency, runtime, or mobile device battery lifetime. This talk uncovers the need for building accurate, platform‐specific power and latency models for convolutional neural networks (CNNs) and efficient hardware-aware CNN design methodologies, thus allowing machine learners and hardware designers to identify not just the best accuracy NN configuration, but also those that satisfy given hardware constraints. Our proposed modeling framework is applicable to both high‐end and mobile platforms and achieves 88.24% accuracy for latency, 88.34% for power, and 97.21% for energy prediction. Using similar predictive models, we demonstrate a novel differentiable neural architecture search (NAS) framework, dubbed Single-Path NAS, that uses one single-path over-parameterized CNN to encode all architectural decisions based on shared convolutional kernel parameters. Single-Path NAS achieves state-of-the-art top-1 ImageNet accuracy (75.62%), outperforming existing mobile NAS methods for similar latency constraints (∼80ms) and finds the final configuration up to 5,000× faster compared to prior work. Combined with our quantized and pruned CNNs that customize precision and pruning level in a layer-wise fashion, such a modeling, analysis, and optimization framework is poised to lead to true co-design of hardware and ML model, orders of magnitude faster than state of the art, while satisfying both accuracy and latency or energy constraints. 
-            <br/>
-            <br/>
-            Biography: Diana Marculescu is Department Chair, Cockrell Family Chair for Engineering Leadership #5, and Professor, Motorola Regents Chair in Electrical and Computer Engineering #2, at the University of Texas at Austin. Before joining UT Austin in December 2019, she was the David Edward Schramm Professor of Electrical and Computer Engineering, the Founding Director of the College of Engineering Center for Faculty Success (2015-2019) and has served as Associate Department Head for Academic Affairs in Electrical and Computer Engineering (2014-2018), all at Carnegie Mellon University. She received the Dipl.Ing. degree in computer science from the Polytechnic University of Bucharest, Bucharest, Romania (1991), and the Ph.D. degree in computer engineering from the University of Southern California, Los Angeles, CA (1998). Her research interests include energy- and reliability-aware computing, hardware aware machine learning, and computing for sustainability and natural science applications. Diana was a recipient of the National Science Foundation Faculty Career Award (2000-2004), the ACM SIGDA Technical Leadership Award (2003), the Carnegie Institute of Technology George Tallman Ladd Research Award (2004), and several best paper awards. She was an IEEE Circuits and Systems Society Distinguished Lecturer (2004-2005) and the Chair of the Association for Computing Machinery (ACM) Special Interest Group on Design Automation (2005-2009). Diana chaired several conferences and symposia in her area and is currently an Associate Editor for IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems. She was selected as an ELATE Fellow (2013-2014), and is the recipient of an Australian Research Council Future Fellowship (2013-2017), the Marie R. Pistilli Women in EDA Achievement Award (2014), and the Barbara Lazarus Award from Carnegie Mellon University (2018). Diana is a Fellow of ACM and IEEE.</div>
-        </div>
-      </div>
-      <div class="row w-row">
-        <div class="column w-col w-col-3"><a href="" class="w-inline-block"><img src="pictures/vivienne.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading">Prof. Vivienne Sze<br/>
-            MIT</h1>
-          </a></div>
-        <div class="w-col w-col-9">
-          <div class="text-block-3">Title: <strong>How to Evaluate Efficient Deep Neural Network Approaches<!--(--></strong><!--<a target="_blank" href="" class="link-13"><strong>Slides</strong></a><strong>)</strong><br/>--> 
-            <br/>
-			  Abstract:  Enabling the efficient processing of deep neural networks (DNNs) has becoming increasingly important to enable the deployment of DNNs on a wide range of platforms, for a wide range of applications. To address this need, there has been a significant amount of work in recent years on designing DNN accelerators and developing approaches for efficient DNN processing that spans the computer vision, machine learning, and hardware/systems architecture communities. Given the volume of work, it would not be feasible to cover them all in a single talk. Instead, this talk will focus on *how* to evaluate these different approaches, which include the design of DNN accelerators and DNN models. It will also highlight the key metrics that should be measured and compared and present tools that can assist in the evaluation. 
-			  <br/>
-            <br/>
-            Biography: Vivienne Sze is an associate professor of electrical engineering and computer science at MIT. She is also the director of the Energy-Efficient Multimedia Systems research group at the Research Lab of Electronics (RLE). Sze works on computing systems that enable energy-efficient machine learning, computer vision, and video compression/processing for a wide range of applications, including autonomous navigation, digital health, and the internet of things. She is widely recognized for her leading work in these areas and has received many awards, including the AFOSR and DARPA Young Faculty Award, the Edgerton Faculty Award, several faculty awards from Google, Facebook, and Qualcomm, the 2018 Symposium on VLSI Circuits Best Student Paper Award, the 2017 CICC Outstanding Invited Paper Award, and the 2016 IEEE Micro Top Picks Award. As a member of the JCT-VC team, she received the Primetime Engineering Emmy Award for the development of the HEVC video compression standard.
-			  <br/>
-For more information about research in the Energy-Efficient Multimedia Systems Group at MIT visit: http://www.rle.mit.edu/eems/ 
-</div>
-        </div>
-      </div>
-      <div class="row w-row">
-        <div class="column w-col w-col-3"><a href="" class="w-inline-block"><img src="pictures/Songhan.png" width="64" alt="" class="person"/>
-          <h1 class="heading">Song Han<br/>
-            MIT, the United States</h1>
-          </a></div>
-        <div class="w-col w-col-9">
-          <div class="text-block-3">Title: <strong>ONCE-FOR-ALL: TRAIN ONE NETWORK AND SPECIALIZE IT FOR EFFICIENT DEPLOYMENT <!--(--></strong><!--<a target="_blank" href="" class="link-11"><strong>Slides</strong></a><strong>)<br/>--> 
-            <br/>
-			  Abstract:
-Last June, researchers released a startling report estimating that the amount of power required for neural architecture search involves the emissions of roughly 626,000 pounds of carbon dioxide. That’s equivalent to nearly five times the lifetime emissions of the average U.S. car, including its manufacturing. This issue gets even more severe in the model deployment phase, where deep neural networks need to be deployed on diverse hardware platforms, including resource-constrained edge devices. I will present a new NAS system for searching and running neural networks efficiently, the once-for-all network (OFA). By decoupling model training and architecture search, OFA can reduce the pounds of carbon emissions involved in neural architecture search by thousands of times. OFA can produce a surprisingly large number of sub-networks (> 10^19) that can fit different hardware platforms and latency constraints. By exploiting weight sharing and progressive shrinking, the produced model consistently outperforms state-of-the-art NAS methods including MobileNet-v3 and EfficientNet (up to 4.0% ImageNet top1 accuracy improvement over MobileNetV3, or same accuracy but 1.5x faster than MobileNetV3, 2.6x faster than EfficientNet). In particular, OFA achieves a SOTA 80.0% ImageNet top-1 accuracy under the mobile setting ($<$600M MACs). OFA is the winning solution for the 3rd and 4th Low Power Computer Vision Challenge (LPCVC). Project page and code is available: https://ofa.mit.edu.
-			  <br/>
-            <br/>
-            </strong>Biography: Song Han is an assistant professor in MIT’s Department of Electrical Engineering and Computer Science. His research focuses on efficient deep learning computing. He proposed “deep compression” technique that can reduce neural network size by an order of magnitude without losing accuracy, and the hardware implementation “efficient inference engine” that first exploited weight pruning and sparsity in deep learning accelerators, which impacted NVIDIA's Ampere GPU architecture. Recently he is interested in neural architecture search for efficient TinyML models. He is a recipient of NSF CAREER Award, MIT Technology Review Innovators Under 35, best paper award at the ICLR’16 and FPGA’17, Facebook Faculty Award, SONY Faculty Award, AWS Machine Learning Award.  </div>
-        </div>
-      </div>
-      <div class="row w-row">
-        <div class="column w-col w-col-3"><a href="" class="w-inline-block"><img src="pictures/chelsea.png" width="64" alt="" class="person"/>
-          <h1 class="heading">Chelsea Finn<br/>
-            Stanford University, <br/>
-            the United States </h1>
-          </a></div>
-        <div class="w-col w-col-9">
-          <div class="text-block-3">Title: <strong>Meta-Learning Beyond Few-Shot Classification<!--(--></strong><!--<a target="_blank" href="" class="link-13"><strong>Slides</strong></a><strong>)</strong><br/>--> 
-            <br/>
-			  Abstract: While meta-learning has shown tremendous potential for enabling learning and generalization from only a 
-few examples, its success beyond few-shot learning has remained less clear. In this talk, I'll discuss our recent work that 
-studies new challenges including handling distribution shift, discovering equivariances from data, and generalizing to 
-qualitatively distinct tasks. In doing so, I'll shed light on the potential for meta-learning to tackle these problems, and the 
-challenges that remain.
-			  <br/>
-            <br/>
-            Biography: Chelsea Finn completed her Ph.D. in computer science at UC Berkeley and her B.S. in electrical engineering and computer science at MIT. Now she is a research scientist at Google Brain, a post-doc at Berkeley AI Research Lab (BAIR), and an acting assistant professor at Stanford. She will join the Stanford Computer Science faculty full time, starting in Fall 2019. She is interested in how algorithms can enable machines to acquire more general notions of intelligence through learning and interaction, allowing them to autonomously learn a variety of complex sensorimotor skills in real-world settings. This includes learning deep representations for representing complex skills from raw sensory inputs, enabling machines to learn through interaction without human supervision, and allowing systems to build upon what they’ve learned previously to acquire new capabilities with small amounts of experience.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="speakers" class="section-3 w-hidden-main w-hidden-medium">
-  <div class="w-container">
-    <h2 class="heading-10">Keynote Speakers</h2>
-    <div>
-      <div class="row w-row">
-        <div class="column w-col w-col-3"><a href="" class="w-inline-block"><img src="pictures/diana.png" width="64" alt="" class="person"/>
-          <h1 class="heading">Prof. Diana Marculescu<br/>
-            CMU</h1>
-          </a></div>
-        <div class="w-col w-col-9">
-          <div class="text-block-3">Title: <strong>TBD <!--(--></strong><!--<a target="_blank" href="" class="link-13"><strong>Slides</strong></a><strong>)</strong><br/>--> 
-            <br/>
-            <br/>
-            Biography: Diana Marculescu is Department Chair, Cockrell Family Chair for Engineering Leadership #5, and Professor, Motorola Regents Chair in Electrical and Computer Engineering #2, at the University of Texas at Austin. Before joining UT Austin in December 2019, she was the David Edward Schramm Professor of Electrical and Computer Engineering, the Founding Director of the College of Engineering Center for Faculty Success (2015-2019) and has served as Associate Department Head for Academic Affairs in Electrical and Computer Engineering (2014-2018), all at Carnegie Mellon University. She received the Dipl.Ing. degree in computer science from the Polytechnic University of Bucharest, Bucharest, Romania (1991), and the Ph.D. degree in computer engineering from the University of Southern California, Los Angeles, CA (1998). Her research interests include energy- and reliability-aware computing, hardware aware machine learning, and computing for sustainability and natural science applications. Diana was a recipient of the National Science Foundation Faculty Career Award (2000-2004), the ACM SIGDA Technical Leadership Award (2003), the Carnegie Institute of Technology George Tallman Ladd Research Award (2004), and several best paper awards. She was an IEEE Circuits and Systems Society Distinguished Lecturer (2004-2005) and the Chair of the Association for Computing Machinery (ACM) Special Interest Group on Design Automation (2005-2009). Diana chaired several conferences and symposia in her area and is currently an Associate Editor for IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems. She was selected as an ELATE Fellow (2013-2014), and is the recipient of an Australian Research Council Future Fellowship (2013-2017), the Marie R. Pistilli Women in EDA Achievement Award (2014), and the Barbara Lazarus Award from Carnegie Mellon University (2018). Diana is a Fellow of ACM and IEEE.</div>
-        </div>
-      </div>
-      <div class="row w-row">
-        <div class="column w-col w-col-3"><a href="" class="w-inline-block"><img src="pictures/vivienne.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading">Prof. Vivienne Sze<br/>
-            MIT</h1>
-          </a></div>
-        <div class="w-col w-col-9">
-          <div class="text-block-3">Title: <strong>TBD <!--(--></strong><!--<a target="_blank" href="" class="link-13"><strong>Slides</strong></a><strong>)</strong><br/>--> 
-            <br/>
-            <br/>
-            Biography: Vivienne Sze received the B.A.Sc. (Hons) degree in electrical engineering from the University of Toronto, Toronto, ON, Canada, in 2004, and the S.M. and Ph.D. degree in electrical engineering from the Massachusetts Institute of Technology (MIT), Cambridge, MA, in 2006 and 2010 respectively. She received the Jin-Au Kong Outstanding Doctoral Thesis Prize in electrical engineering at MIT in 2011. She is currently an Associate Professor in the Electrical Engineering and Computer Science Department at MIT. Her research interests include energy-efficient algorithms and architectures for portable multimedia applications. From September 2010 to July 2013, she was a Member of Technical Staff in the Systems and Applications R&D Center at Texas Instruments (TI), Dallas, TX, where she designed low-power algorithms and architectures for video coding. She also represented TI in the JCT-VC committee of ITU-T and ISO/IEC standards body during the development of High Efficiency Video Coding (HEVC), which received a Primetime Emmy Engineering Award. Within the committee, she was the primary coordinator of the core experiment on coefficient scanning and coding. She is a recipient of the 2017 Qualcomm Faculty Award, the 2016 Google Faculty Research Award, the 2016 AFOSR Young Investigator Research Program (YIP) Award, the 2016 3M Non-Tenured Faculty Award, the 2014 DARPA Young Faculty Award, the 2007 DAC/ISSCC Student Design Contest Award, and a co-recipient of the 2017 CICC Outstanding Invited Paper Award, the 2016 IEEE Micro Top Picks Award and the 2008 A-SSCC Outstanding Design Award.</div>
-        </div>
-      </div>
-      <div class="row w-row">
-        <div class="column w-col w-col-3"><a href="" class="w-inline-block"><img src="pictures/Songhan.png" width="64" alt="" class="person"/>
-          <h1 class="heading">Song Han<br/>
-            MIT, the United States</h1>
-          </a></div>
-        <div class="w-col w-col-9">
-          <div class="text-block-3">Title: <strong>TBD<!--(--></strong><!--<a target="_blank" href="" class="link-11"><strong>Slides</strong></a><strong>)<br/>--> 
-            <br/>
-            <br/>
-            </strong>Biography: Song Han is an assistant professor at MIT EECS. Dr. Han received the Ph.D. degree in Electrical Engineering from Stanford advised by Prof. Bill Dally. Dr. Han’s research focuses on efficient deep learning computing. He proposed “Deep Compression” and “Efficient Inference Engine” that impacted the industry. His work received the best paper award in ICLR’16 and FPGA’17. He is the co-founder and chief scientist of DeePhi Tech (a leading efficient deep learning solution provider), which was acquired by Xilinx. The pruning, compression and acceleration techniques have been integrated into products.</div>
-        </div>
-      </div>
-      <div class="row w-row">
-        <div class="column w-col w-col-3"><a href="" class="w-inline-block"><img src="pictures/chelsea.png" width="64" alt="" class="person"/>
-          <h1 class="heading">Chelsea Finn<br/>
-            Stanford University, <br/>
-            the United States </h1>
-          </a></div>
-        <div class="w-col w-col-9">
-          <div class="text-block-3"> Title: <strong>TBD <!--(--></strong><!--<a target="_blank" href="" class="link-13"><strong>Slides</strong></a><strong>)</strong><br/>--> 
-            <br/>
-            <br/>
-            Biography: Chelsea Finn completed her Ph.D. in computer science at UC Berkeley and her B.S. in electrical engineering and computer science at MIT. Now she is a research scientist at Google Brain, a post-doc at Berkeley AI Research Lab (BAIR), and an acting assistant professor at Stanford. She will join the Stanford Computer Science faculty full time, starting in Fall 2019. She is interested in how algorithms can enable machines to acquire more general notions of intelligence through learning and interaction, allowing them to autonomously learn a variety of complex sensorimotor skills in real-world settings. This includes learning deep representations for representing complex skills from raw sensory inputs, enabling machines to learn through interaction without human supervision, and allowing systems to build upon what they’ve learned previously to acquire new capabilities with small amounts of experience.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="program" class="section w-hidden-small w-hidden-tiny">
-  <div class="w-container">
-    <h2 id="program" class="heading-6">Program (Tentative)</h2>
-    <div class="text-block-17"> (Virtual Conference, Seattle Time: June 15, 2020) </div>
-    <div>
-      <div class="html-embed w-embed">
-        <table border="1" width="100%" align="center">
-          <tr>
-            <th font size="1" bgcolor="#808080" align="center" style='width: 440px' colspan="2" >Presentation Time<br/>
-              (Seattle Time)</th>
-            <th font size="1" bgcolor="#808080" align="center" style='width: 120px'>Event</th>
-            <th font size="1" bgcolor="#808080" align="center" >Title</th>
-            <th font size="1" bgcolor="#808080" align="center" style='width: 80px'>Paper ID</th>
-            <th font size="1" bgcolor="#808080" align="center" style='width: 80px'>Duration</th>
-          </tr>
-          <tr align="center">
-            <td colspan="2">08:30 ~ 08:40</td>
-            <td colspan="2">Opening</td>
-            <td>900</td>
-            <td>10 min</td>
-          </tr>
-          <tr align="center" >
-            <td>08:40 ~ 09:20</td>
-            <td>20:40 ~ 21:20</td>
-            <td>Keynote 1</td>
-            <td>Putting the “Machine” Back in Machine Learning: The Case for Hardware-ML Model Co-design, </br>
-			<a target="_blank" href=".\slides\901-talk.pdf" class="link-13">Dr. Diana Marculescu's slides</a></td></td>
-            <td>901</td>
-            <td>40 min</td>
-          </tr>
-          <tr align="center" >
-            <td>09:20 ~ 10:00</td>
-            <td>21:20 ~ 22:00</td>
-            <td>Keynote 2</td>
-            <td>How to Evaluate Efficient Deep Neural Network Approaches,</br> Dr. Vivienne Sze's talk is available at:
-			<a href="https://www.youtube.com/watch?v=HTu7RokJsxc" class="link">Youtube</a></br>
-		  <a target="_blank" href=".\slides\Sze.pdf" class="link-13">Dr. Vivienne Sze's slides</a></td>
-            <td>902</td>
-            <td>40 min</td>
-          </tr>
-			<tr align="center" >
-            <td>10:00 ~ 10:15</td>
-            <td>22:00 ~ 22:15</td>
-            <td rowspan="4">Oral 1</td>
-            <td>Randaugment: Practical automated data augmentation with a reduced search space</td>
-            <td>27</td>
-            <td>15 min</td>
-          </tr>
-          <tr align="center" >
-            <td>10:15 ~ 10:30</td>
-            <td>22:15 ~ 22:30</td>
+<body bgcolor=white lang=FI link="#0000CC" vlink="#660033" style='tab-interval:
+36.0pt' alink="#FF0000">
+<div class=WordSection1>
+  <p align=center style='margin-top:5.0pt;margin-right:2.0cm;margin-bottom:5.0pt;margin-left:2.0cm;text-align:center'> 
+	  <span lang=EN-US style='font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>
+		  <span style='mso-spacerun:yes'> </span>
+	  </span>
+	  <![if !vml]>
+	  <span style='mso-ignore:vglayout'>
+		  <a href="https://www.computer.org/web/tpami"><img border=0 width=780 height=240 src="css/TPAMI1.jpg" v:shapes="Picture_x0020_15"></a></span>
+	  <![endif]>
+	  <span lang=EN-US style='font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>
+    <o:p></o:p>
+      </span>
+  </p>
+  <p align=center style='margin-top:5.0pt;margin-right:2.0cm;margin-bottom:5.0pt;margin-left:2.0cm;text-align:center'>
+	  <span lang=EN-US style='font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>
+		  <span style='mso-spacerun:yes'> </span>
+	  </span>
+	  <b style='mso-bidi-font-weight:normal'>
+		  <span lang=EN-US style='font-size:28.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:Arial;color:#C00000;mso-ansi-language:EN-US'>Call for Papers: IEEE <a href="https://www.computer.org/web/tpami">TPAMI</a> Special Issue
+    <o:p></o:p>
+          </span>
+	  </b>
+  </p>
+  <p align=center style='margin-top:5.0pt;margin-right:2.0cm;margin-bottom:5.0pt;margin-left:2.0cm;text-align:center'>
+	  <b style='mso-bidi-font-weight:normal'>
+		  <span lang=EN-US style='font-size:28.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:Arial;color:#C00000;mso-ansi-language:EN-US'>
+    <o:p></o:p>
+          </span>
+	  </b>
+  </p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt'>
+	  <b style='mso-bidi-font-weight:normal'>
+		  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Call for Papers
+    <o:p></o:p>
+          </span>
+	  </b>
+  </p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt'>
+	  <b style='mso-bidi-font-weight:normal'>
+		  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+          </span>
+	  </b>
+  </p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify;mso-layout-grid-align:none;text-autospace:none'>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;color:windowtext;mso-ansi-language:EN-US'>
+		  <a href="http://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=34">
+			  <span style='color:windowtext'>IEEE Transactions on </span>
+			  <span style='mso-fareast-font-family:"Times New Roman";mso-fareast-theme-font:minor-fareast;mso-bidi-font-family:
+"Times New Roman";color:black'>Pattern</span>
+			  <span style='color:windowtext'> Analysis and Machine Intelligence</span>
+		  </a> Special Issue on 
+	  </span>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;color:#0070C0;mso-ansi-language:EN-US'>Learning with Fewer Labels in Computer Vision</span>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;color:#C00000;mso-ansi-language:EN-US'>
+    <o:p></o:p>
+      </span>
+  </p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify;mso-layout-grid-align:
+none;text-autospace:none'><span lang=EN-US style='font-size:24.0pt;font-family:
+"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:
+"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;color:windowtext;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify;mso-layout-grid-align:
+none;text-autospace:none'><span lang=EN-US style='font-size:24.0pt;font-family:
+"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:
+"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;color:windowtext;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify;mso-layout-grid-align:none;text-autospace:none'>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;color:windowtext;mso-ansi-language:EN-US'>The past several years have witnessed an explosion of interest in and a dizzyingly fast development of machine learning, a subfield of artificial intelligence.  Foremost among these approaches are Deep Neural Networks (DNNs) that can learn powerful feature representations with multiple levels of abstraction directly from data when large amounts of labeled data is available.  One of the core computer vision areas, namely, object classification achieved a significant breakthrough result with a deep convolutional neural network and the large scale ImageNet dataset, which is arguably what reignited the field of artificial neural networks and triggered the recent revolution in Artificial Intelligence (AI). Nowadays, artificial intelligence has spread over almost all fields of science and technology. Yet, computer vision remains in the heart of these advances when it comes to visual data analysis, offering the biggest big data and enabling advanced AI solutions to be developed.
+    <o:p></o:p>
+      </span>
+	</p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:none'>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+		  <o:p>&nbsp;</o:p>
+       </span>
+  </p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify;mso-layout-grid-align:none;text-autospace:none'>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;color:windowtext;mso-ansi-language:EN-US'>Undoubtedly, DNNs have shown remarkable success in many computer vision tasks, such as recognizing/localizing/segmenting faces, persons, objects, scenes, actions and gestures, and recognizing human expressions, emotions, as well as object relations and interactions in images or videos. Despite a wide range of impressive results, current DNN based methods typically depend on massive amounts of accurately annotated training data to achieve high performance, and are brittle in that their performance can degrade severely with small changes in their operating environment. Generally, collecting large scale training datasets is time-consuming, costly, and in many applications even infeasible, as for certain fields only very limited or no examples at all can  be gathered (such as visual inspection or medical domain), although for some computer vision tasks large amounts of unlabeled data may be relatively easy to collect, e.g., from the web or via synthesis. Nevertheless, labeling and vetting massive amounts of real-world training data is certainly difficult,  expensive,  or  time-consuming,  as  it  requires the painstaking efforts of experienced human annotators or experts, and in many cases prohibitively costly or impossible due to some  reason,  such  as  privacy,  safety or ethic issues (e.g., endangered species, drug discovery, medical diagnostics and industrial inspection).
+    <o:p></o:p>
+      </span>
+  </p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify;mso-layout-grid-align:none;text-autospace:none'>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;color:windowtext;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+      </span>
+  </p>
+	
+	  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify;mso-layout-grid-align:none;text-autospace:none'>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;color:windowtext;mso-ansi-language:EN-US'>DNNs lack the ability of learning from limited exemplars and fast generalizing to new tasks. However, real-word computer vision applications often require models that are able to (a) learn with few annotated samples, and (b) continually adapt to new data without forgetting prior knowledge. By contrast, humans can learn from just one   or a handful of examples (i.e., few shot learning), can do very long-term learning, and can form abstract models of a situation and manipulate these models to achieve extreme generalization. As a result, one of the next big challenges in computer vision is to develop learning approaches that are capable of addressing the important shortcomings of existing methods in this regard. Therefore, in order to address the current inefficiency of machine learning, there is pressing need to research methods, (1) to drastically reduce requirements for labeled training data, (2) to significantly reduce the amount of data necessary to adapt models to new environments, and (3) to even use as little labeled training data as people need.
+    <o:p></o:p>
+      </span>
+  </p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify;mso-layout-grid-align:none;text-autospace:none'>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;color:windowtext;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+      </span>
+  </p>
+	
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify;mso-layout-grid-align:none;text-autospace:none'>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>This special issue focuses on learning with fewer labels for computer vision tasks such as image classification, object detection, semantic segmentation, instance segmentation, and many others and the topics of interest include (but are not limited to) the following areas:
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify;mso-layout-grid-align:
+none;text-autospace:none'><span lang=EN-US style='font-size:24.0pt;font-family:
+"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:
+"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;color:windowtext;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+	
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:80.35pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:125%;mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'>
+	  <![if !supportLists]>
+	  <span lang=EN-US style='font-size:24.0pt;line-height:125%;font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:EN-US'>
+		  <span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span>
+		  </span>
+	  </span>
+	  <![endif]>
+	  <span lang=EN-US style='font-size:24.0pt;line-height:125%;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+		  <span style='mso-spacerun:yes'> </span>
+		  Self-supervised learning methods
+    <o:p></o:p>
+    </span>
+  </p>
+	
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:80.35pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:125%;
+mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+lang=EN-US style='font-size:24.0pt;line-height:125%;font-family:Symbol;
+mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:
+EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;
+line-height:125%;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'> </span>New methods for few-/zero-shot learning
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:80.35pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:125%;
+mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+lang=EN-US style='font-size:24.0pt;line-height:125%;font-family:Symbol;
+mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:
+EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;
+line-height:125%;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'> </span>Meta-learning methods
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:80.35pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:125%;
+mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+lang=EN-US style='font-size:24.0pt;line-height:125%;font-family:Symbol;
+mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:
+EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;
+line-height:125%;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'> </span>Life-long/continual/incremental learning methods
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:80.35pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:125%;
+mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+lang=EN-US style='font-size:24.0pt;line-height:125%;font-family:Symbol;
+mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:
+EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;
+line-height:125%;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'> </span>Novel domain adaptation methods
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:80.35pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:125%;
+mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+lang=EN-US style='font-size:24.0pt;line-height:125%;font-family:Symbol;
+mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:
+EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;
+line-height:125%;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'> </span>Semi-supervised learning methods
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:80.35pt;margin-bottom:.0001pt;text-indent:-18.0pt;line-height:125%;
+mso-list:l1 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+lang=EN-US style='font-size:24.0pt;line-height:125%;font-family:Symbol;
+mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;mso-ansi-language:
+EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;
+line-height:125%;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><span
+style='mso-spacerun:yes'> </span>Weakly-supervised learning methods
+    <o:p></o:p>
+    </span></p>
 
-            <td>Neural Network Compression Using Higher-Order Statistics and Auxiliary Reconstruction Losses</td>
-            <td>39</td>
-            <td>15 min</td>
-          </tr>
-          <tr align="center" >
-            <td>10:30 ~ 10:45</td>
-            <td>22:30 ~ 22:45</td>
-            
-            <td>Dithered backprop: A sparse and quantized backpropagation algorithm for more efficient deep neural network training</td>
-            <td>43</td>
-            <td>15 min</td>
-          </tr>
-          <tr align="center" >
-            <td>10:45 ~ 11:00</td>
-            <td>22:45 ~ 23:00</td>
-            <td>Learning Sparse & Ternary Neural Networks with Entropy-Constrained Trained Ternarization (EC2T)</td>
-            <td>44</td>
-            <td>15 min</td>
-          </tr>
-          <tr align="center" >
-            <td>11:30 ~ 11:35</td>
-            <td>23:30 ~ 23:35</td>
-			  <td rowspan="9">Spotlights 1</td>
-            <td>Learning Low-rank Deep Neural Networks via Singular Vector Orthogonality Regularization and Singular Value Sparsification</td>
-            <td>4</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>11:35 ~ 11:40</td>
-            <td>23:35 ~ 23:40</td>
-            <td>FoNet: A Memory-efficient Fourier-based Orthogonal Network for Object Recognition</td>
-            <td>15</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>11:40 ~ 11:45</td>
-            <td>23:40 ~ 23:45</td>
-			 
-            <td>LSQ+: Improving low-bit quantization through learnable offsets and better initialization</td>
-            <td>20</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>11:45 ~ 11:50</td>
-            <td>23:45 ~ 23:50</td>
-            
-            <td>Least squares binary quantization of neural networks</td>
-            <td>22</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>11:55 ~ 12:00</td>
-            <td>23:55 ~ 00:00</td>
-            <td>Any-Width Networks</td>
-            <td>29</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>12:00 ~ 12:05</td>
-            <td>00:00 ~ 00:05</td>
-            <td>Data-Free Network Quantization With Adversarial Knowledge Distillation</td>
-            <td>35</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>12:05 ~ 12:10</td>
-            <td>00:05 ~ 00:10</td>
-            <td>Structured Weight Unification and Encoding for Neural Network Compression and Acceleration</td>
-            <td>38</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>12:10 ~ 12:15</td>
-            <td>00:10 ~ 00:15</td>
-            <td>Intelligent Scene Caching to Improve Accuracy for Energy-Constrained Embedded Vision</td>
-            <td>46</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>12:15 ~ 12:30</td>
-            <td>00:15 ~ 00:30</td>
-            <td>Adaptive Posit: Parameter aware numerical format for deep learning inference on the edge</td>
-            <td>52</td>
-            <td>15 min</td>
-          </tr>
-          <tr align="center" >
-            <td>14:00 ~ 14:40</td>
-            <td>02:00 ~ 02:40</td>
-			  <td>Keynote 3</td>
-            <td>Once-for-all: train one network and specialize it for efficient deployment</br>Dr. Song Han's talk is available at: <a href="https://youtu.be/fptQ_eJ3Uc0" class="link">Youtube</a>, 
-			<a href="https://drive.google.com/file/d/197vxhSowfLp8mGSGAeZNrmZjAdwAl56-/view?usp=sharing" class="link">Google Drive</a>,
-			<a href="https://www.bilibili.com/video/BV19D4y1D7mr" class="link">Bilibili</a></br>
-	  <a target="_blank" href=".\slides\songhan.pdf" class="link-13">Dr. Song Han's slides</a></td>
-            <td>903</td>
-            <td>40 min</td>
-          </tr>
-          <tr align="center" >
-            <td>14:40 ~ 14:55</td>
-            <td>02:40 ~ 02:55</td>
-			  <td rowspan="5">Oral 2</td>
-            <td>BAMSProd: A Step towards Generalizing the Adaptive Optimization Methods to Deep Binary Model</td>
-            <td>1</td>
-            <td>15 min</td>
-          </tr>
-          <tr align="center" >
-            <td>14:55 ~ 15:10</td>
-            <td>02:55 ~ 03:10</td>
-			   
-            <td>Dynamic Inference: A New Approach Toward Efficient Video Action Recognition</td>
-            <td>3</td>
-            <td>15 min</td>
-          </tr>
-          <tr align="center" >
-            <td>15:10 ~ 15:25</td>
-            <td>03:10 ~ 03:25</td>
-            <td>Low-bit Quantization Needs Good Distribution</td>
-            <td>7</td>
-            <td>15 min</td>
-          </tr>
-          <tr align="center" >
-            <td>15:25 ~ 15:40</td>
-            <td>03:25 ~ 03:40</td>
-         
-            <td>Attentive Semantic Preservation Network for Zero-Shot Learning</td>
-            <td>9</td>
-            <td>15 min</td>
-          </tr>
-          <tr align="center" >
-            <td>15:40 ~ 15:55</td>
-            <td>03:40 ~ 03:55</td>
-            
-            <td>AdaMT-Net: An Adaptive Weight Learning Based Multi-Task Learning Model For Scene Understanding</td>
-            <td>31</td>
-            <td>15 min</td>
-          </tr>
-          <tr align="center" >
-            <td>16:20 ~ 17:00</td>
-            <td>04:20 ~ 05:00</td>
-			  <td>Keynote 4</td>
-            <td>Meta-Learning for Efficient Deep Learning, </br>
-	           <a target="_blank" href=".\slides\Finn.pdf" class="link-13">Dr Chelsea Finn's slides</a></td>
-           	
-            <td>904</td>
-            <td>40 min</td>
-          </tr>
-          <tr align="center" >
-            <td>17:30 ~ 17:35</td>
-            <td>05:30 ~ 05:35</td>
-            <td rowspan="9">Spotlights 2</td>
-            <td>Mimic The Raw Domain: Accelerating Action Recognition in the CompressedDomain</td>
-            <td>11</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>17:35 ~ 17:40</td>
-            <td>05:35 ~ 05:40</td>
-            <td>Constraint-Aware Importance Estimation for Global Filter Pruning under Multiple Resource Constraints</td>
-            <td>13</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>17:40 ~ 17:45</td>
-            <td>05:40 ~ 05:45</td>
-            <td>Computer-aided diagnosis system of lung carcinoma using Convolutional Neural Networks</td>
-            <td>16</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>17:45 ~ 17:50</td>
-            <td>05:45 ~ 05:50</td>
-            <td>Fast Hardware-Aware Neural Architecture Search</td>
-            <td>18</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>17:50 ~ 17:55</td>
-            <td>05:50 ~ 05:55</td>
-            <td>Learning Sparse Neural Networks Through Mixture-Distributed Regularization</td>
-            
-            <td>19</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>17:55 ~ 18:00</td>
-            <td>05:55 ~ 06:00</td>
-           
-            <td>RefineDetLite: A Lightweight One-stage Object Detection Framework for CPU-only Devices</td>
-            <td>23</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>18:00 ~ 18:05</td>
-            <td>06:00 ~ 06:05</td>
-            <td>Ternary MobileNets via Per-Layer Hybrid Filter Banks</td>
-            <td>34</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>18:05 ~ 18:10</td>
-            <td>06:05 ~ 06:10</td>
-            <td>Now that I can see, I can improve : Enabling data-driven finetuning of CNNs on the edge</td>
-            <td>36</td>
-            <td>5 min</td>
-          </tr>
-          <tr align="center" >
-            <td>18:10 ~ 18:15</td>
-            <td>06:10 ~ 06:15</td>
-            <td>Monte Carlo Gradient Quantization</td>
-            <td>42</td>
-            <td>5 min</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Priority will be
+    given to papers with high novelty and originality for research papers, and to
+    papers with high potential impact for survey/overview papers.
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <!--<p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><b style='mso-bidi-font-weight:normal'><span lang=EN-US style='font-size:
+24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;
+mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;
+mso-ansi-language:EN-US'>Paper submission and review:
+    <o:p></o:p>
+    </span></b></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><b style='mso-bidi-font-weight:normal'><span lang=EN-US style='font-size:
+24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;
+mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;
+mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></b></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Authors need to
+    submit full papers online through the TPAMI site at,
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;color:#C00000;mso-ansi-language:EN-US'><a
+href="https://mc.manuscriptcentral.com/tpami-cs">https://mc.manuscriptcentral.com/tpami-cs</a>
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><span class=GramE><span lang=EN-US style='font-size:24.0pt;font-family:
+"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:
+"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>selecting</span></span><span
+lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:
+minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:
+minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;
+mso-ansi-language:EN-US'> the choice that indicates this special issue. Peer
+    reviewing will follow the standard IEEE review process. Full length manuscripts
+    are expected to follow the TPAMI guidelines in <br>
+    </span><span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;color:#C00000;mso-ansi-language:EN-US'><a
+href="http://www.computer.org/portal/web/peerreviewjournals/author">http://www.computer.org/portal/web/peerreviewjournals/author</a></span><span
+lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:
+minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:
+minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;
+mso-ansi-language:EN-US'>
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>-->
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:none'>
+	  <b style='mso-bidi-font-weight:normal'>
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Submission Deadline:
+    <o:p></o:p>
+      </span>
+	  </b>
+  </p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:
+none'><b style='mso-bidi-font-weight:normal'><span lang=EN-US style='font-size:
+24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;
+mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;
+mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></b></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-layout-grid-align:none;text-autospace:none'>
+	  
+		  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Paper Submission Deadline: </span>
+	  
+	  
+		  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;color:#C00000;mso-ansi-language:EN-US'>April 15, 2021.</span>
+	  
+	  <span lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p></o:p>
+      </span>
+  </p>
+  <p class=Default style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt'><span lang=EN-US style='font-size:
+24.0pt;mso-ascii-font-family:Calibri;mso-ascii-theme-font:minor-latin;
+mso-hansi-font-family:Calibri;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:
+"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <p class=Default style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt'><span lang=EN-US style='font-size:
+24.0pt;mso-ascii-font-family:Calibri;mso-ascii-theme-font:minor-latin;
+mso-hansi-font-family:Calibri;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:
+"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt'><b style='mso-bidi-font-weight:normal'><span
+lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:
+minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Guest editors
+    <o:p></o:p>
+    </span></b></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt'><b style='mso-bidi-font-weight:normal'><span
+lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:
+minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></b></p>
+	
+  <p class=MsoListParagraphCxSpFirst style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:7.1pt;line-height:normal;mso-list:l0 level1 lfo4;tab-stops:84.7pt'><![if !supportLists]><span lang=EN-US style='font-size:24.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black;mso-themecolor:text1;mso-ansi-language:EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><a href="http://www.ee.oulu.fi/~lili/LiLiuHomepage.html">Li Liu</a>: National University of Defense Technology, China, <span style='color:#C00000'>li.liu@oulu.fi<o:p></o:p></span></span></p>	
+  <p class=MsoListParagraphCxSpMiddle style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.4cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:3.0cm;line-height:normal'><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Center for Machine Vision and Signal Analysis (CMVS), University of Oulu, Finland<o:p></o:p></span></p>
+	
+    <p class=MsoListParagraphCxSpFirst style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:7.1pt;line-height:normal;mso-list:l0 level1 lfo4;tab-stops:84.7pt'><![if !supportLists]><span lang=EN-US style='font-size:24.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black;mso-themecolor:text1;mso-ansi-language:EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><a href="https://homepages.inf.ed.ac.uk/thospeda/">Timothy Hospedales</a>: Professor, University of Edinburgh, UK,<span style='color:#C00000'> t.hospedales@ed.ac.uk<o:p></o:p></span></span></p>	
+  <p class=MsoListParagraphCxSpMiddle style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:7.6cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:3.0cm;line-height:normal'><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Principal Scientist at Samsung AI Research Centre Alan Turing Institute Fellow<o:p></o:p></span></p>
+	
+	  <p class=MsoListParagraphCxSpFirst style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:7.1pt;line-height:normal;mso-list:l0 level1 lfo4;tab-stops:84.7pt'><![if !supportLists]><span lang=EN-US style='font-size:24.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black;mso-themecolor:text1;mso-ansi-language:EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><a href="http://yann.lecun.com/">Yann LeCun</a>: Silver Professor, New York University,  United  States VP and Chief AI Scientist at Facebook, <span style='color:#C00000'>yann@fb.com<o:p></o:p></span></span></p>	
+	
+	  <p class=MsoListParagraphCxSpFirst style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:7.1pt;line-height:normal;mso-list:l0 level1 lfo4;tab-stops:84.7pt'><![if !supportLists]><span lang=EN-US style='font-size:24.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black;mso-themecolor:text1;mso-ansi-language:EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><a href="http://ise.thss.tsinghua.edu.cn/~mlong/">Mingsheng Long</a>: Associate Professor, Tsinghua University, China, <span style='color:#C00000'>mingsheng@tsinghua.edu.cn<o:p></o:p></span></span></p>	
 
-<!--table表示创建表格  tr表示一行中的单元格 td表示单元格  th表示标题--> 
-<!--thead表示表头  tbody表示表的内容  tfoot表示表脚--> 
-<!--br换行 没有/br--> 
-<!--colspan表示合并行单元格  rowspan表示合并列单元格-->
+	
+	  <p class=MsoListParagraphCxSpFirst style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:7.1pt;line-height:normal;mso-list:l0 level1 lfo4;tab-stops:84.7pt'><![if !supportLists]><span lang=EN-US style='font-size:24.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black;mso-themecolor:text1;mso-ansi-language:EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><a href="https://www.cs.rochester.edu/u/jluo/">Jiebo Luo</a>: Professor, University of Rochester, United States, <span style='color:#C00000'>jluo@cs.rochester.edu<o:p></o:p></span></span></p>	
 
-<div id="program2" class="section w-hidden-main w-hidden-medium">
-  <div class="w-container">
-    <h2 id="program" class="heading-8">Program (Tentative)</h2>
-    <div class="text-block-17"> (Location: <a href="" target="_blank" class="link-8"> TBD </a> <a href="" target="_blank" class="link-9"> </a>) </div>
-    <div>
-      <div class="html-embed-2 w-embed">
-        <table  border="1" width="300" align="center" >
-          <tr>
-            <th font size="1" bgcolor="#808080" align="center" > <font color="white" > <font size="1"> Time</font> </th>
-            <th bgcolor="#808080" align="center" > <font color="white"><font size="1">Event</font> </th>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">8:50 - 9:00 </font></td>
-            <td><font size="1">Welcome by organizers</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">9:00 - 9:30 </font></td>
-            <td><b><font size="1">Invited talk: Prof. Philip Torr (Oxford University)</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">9:30 - 10:00 </font></td>
-            <td><b><font size="1">Invited talk: Prof. Nic Lane (Oxford University)</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">10:00 - 10:30 </font></td>
-            <td><font size="1">Coffee break</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">10:30 - 11:00</font></td>
-            <td><b><font size="1">Oral Session 1 (3  presentations: 10min each)</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">11:00 - 11:30</font></td>
-            <td><b><font size="1">Keynote talk: Prof. Song Han (MIT)</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">11:30 - 12:00 </font></td>
-            <td><b><font size="1">Invited talk: Prof. Diana Marculescu (CMU)</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">12:00 - 12:30 </font></td>
-            <td><b><font size="1">Oral Session 2 (3  presentations: 10min each)</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">12:30 - 13:30 </font></td>
-            <td><font size="1"> Lunch break</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">13:30 - 14:00 </font></td>
-            <td><b><font size="1">Keynote talk: Prof. Bill Dally (Stanford)</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">14:00 - 14:30 </font></td>
-            <td><b><font size="1">Invited talk: Prof. Chelsea Finn (Stanford)</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">14:30 - 15:00 </font></td>
-            <td><b><font size="1">Oral Session 3 (3  presentations: 10min each)</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">15:00 - 16:00 </font></td>
-            <td><b><font size="1">Poster session by paper submission</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">16:00 - 17:30 </font></td>
-            <td><b><font size="1">Panel presentations and discussion on Efficient deep learning algorithms. Moderator: Luc Van Gool</font></td>
-          </tr>
-          <tr align="center" >
-            <td><font size="1">17:30 - 17:45 </font></td>
-            <td><b><font size="1">Closing awards for best paper and best poster</font></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
+	
+	  <p class=MsoListParagraphCxSpFirst style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:7.1pt;line-height:normal;mso-list:l0 level1 lfo4;tab-stops:84.7pt'><![if !supportLists]><span lang=EN-US style='font-size:24.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black;mso-themecolor:text1;mso-ansi-language:EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><a href="https://wlouyang.github.io/">Wanli Ouyang</a>: Senior Lecturer, University of Sydney, Australia, <span style='color:#C00000'>wanli.ouyang@sydney.edu.au<o:p></o:p></span></span></p>	
+
+	
+	  <p class=MsoListParagraphCxSpFirst style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:7.1pt;line-height:normal;mso-list:l0 level1 lfo4;tab-stops:84.7pt'><![if !supportLists]><span lang=EN-US style='font-size:24.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black;mso-themecolor:text1;mso-ansi-language:EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><a href="https://scholar.google.com/citations?user=bjEpXBoAAAAJ&amp;hl=en">Matti Pietik�inen</a>: Professor (IEEE Fellow), Center for Machine Vision and Signal Analysis University of Oulu (CMVS), Finland,<o:p></o:p></span></span></p>
+	<p class=MsoListParagraphCxSpMiddle style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:6.5cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:3.0cm;line-height:normal'><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><span style='color:#C00000'>matti.pietikainen@oulu.fi<o:p></o:p></span></p>
+  
+	
+	  <p class=MsoListParagraphCxSpFirst style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;margin-left:2.0cm;margin-bottom:.0001pt;mso-add-space:auto;text-indent:7.1pt;line-height:normal;mso-list:l0 level1 lfo4;tab-stops:84.7pt'><![if !supportLists]><span lang=EN-US style='font-size:24.0pt;font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black;mso-themecolor:text1;mso-ansi-language:EN-US'><span style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span lang=EN-US style='font-size:24.0pt;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'><a href="https://homes.esat.kuleuven.be/~tuytelaa/">Tinne Tuytelaars</a>: Professor, KU Leuven, Belgium, <span style='color:#C00000'>Tinne.Tuytelaars@esat.kuleuven.be<o:p></o:p></span></span></p>	
+
+  
+  
+  
+  
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;text-align:justify'><b
+style='mso-bidi-font-weight:normal'><span lang=EN-US style='font-size:24.0pt;
+font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-hansi-theme-font:
+minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;
+mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></b></p>
+  <p class=Default style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt'><span lang=EN-US style='font-size:
+24.0pt;mso-ascii-font-family:Calibri;mso-ascii-theme-font:minor-latin;
+mso-hansi-font-family:Calibri;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:
+"Times New Roman";mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt'><b style='mso-bidi-font-weight:normal'><span
+lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:
+minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Main Contact
+    <o:p></o:p>
+    </span></b></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt'><b style='mso-bidi-font-weight:normal'><span
+lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:
+minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></b></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;text-indent:14.2pt'><b
+style='mso-bidi-font-weight:normal'><span lang=EN-US style='font-size:24.0pt;
+font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:
+"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Li Liu</span></b><b
+style='mso-bidi-font-weight:normal'><span lang=EN-US style='font-size:24.0pt;
+font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-hansi-theme-font:
+minor-latin;mso-bidi-font-family:"Times New Roman";mso-bidi-theme-font:minor-fareast;
+mso-ansi-language:EN-US'>
+    <o:p></o:p>
+    </span></b></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;text-indent:14.2pt'><span lang=EN-US
+style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:
+minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Email: <span
+class=GramE>li.liu@oulu.fi,</span> dreamliu2010@gmail.com
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:2.0cm;margin-bottom:.0001pt;text-indent:14.2pt'><span lang=EN-US
+style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:
+minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>National University
+    of Defense Technology, China
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal style='margin-top:0cm;margin-right:2.0cm;margin-bottom:0cm;
+margin-left:70.9pt;margin-bottom:.0001pt'><span lang=EN-US style='font-size:
+24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;
+mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>Center for Machine
+    Vision and Signal Analysis (CMVS)</span><span lang=EN-US style='font-size:24.0pt;
+font-family:"Calibri",sans-serif;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:
+"Times New Roman";mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>, <br>
+    University of Oulu, Finland </span><b style='mso-bidi-font-weight:normal'><span
+lang=EN-US style='font-size:24.0pt;font-family:"Calibri",sans-serif;mso-ascii-theme-font:
+minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:"Times New Roman";
+mso-bidi-theme-font:minor-fareast;mso-ansi-language:EN-US'>
+    <o:p></o:p>
+    </span></b></p>
+  <p class=MsoNormal style='margin-top:12.0pt;margin-right:2.0cm;margin-bottom:
+12.0pt;margin-left:2.0cm'><b style='mso-bidi-font-weight:normal'><span
+lang=EN-US style='font-size:16.0pt;mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+"Times New Roman";mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></b></p>
+  <p align=center style='margin-top:5.0pt;margin-right:2.0cm;margin-bottom:5.0pt;
+margin-left:2.0cm;text-align:center'><span lang=EN-US style='font-size:10.0pt;
+font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>&nbsp;</span><span
+lang=EN-US style='font-family:"Arial",sans-serif;mso-ansi-language:EN-US'>
+    <o:p></o:p>
+    </span></p>
+  <p align=center style='margin-top:5.0pt;margin-right:2.0cm;margin-bottom:5.0pt;
+margin-left:2.0cm;text-align:center'><span lang=EN-US style='font-size:16.0pt;
+mso-bidi-font-size:12.0pt;font-family:"Comic Sans MS";mso-bidi-font-family:
+Arial;mso-ansi-language:EN-US'>Any question about this page? Turn to <a
+href="mailto:li.liu@oulu.fi"><span style='color:blue'>its host</span></a>!</span><span
+lang=EN-US style='font-size:16.0pt;mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif;
+mso-ansi-language:EN-US'>
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal align=center style='mso-margin-top-alt:auto;margin-right:
+2.0cm;mso-margin-bottom-alt:auto;margin-left:2.0cm;text-align:center'><span
+lang=EN-US style='font-size:14.0pt;mso-bidi-font-size:7.5pt;mso-fareast-font-family:
+SimSun;color:#003333;mso-ansi-language:EN-US'>This page is maintained currently
+    by <a href="mailto:li.liu@oulu.fi">Li Liu</a>. Last modified: 20</span><span
+lang=EN-US style='font-size:14.0pt;mso-bidi-font-size:7.5pt;mso-fareast-font-family:
+SimSun;mso-ansi-language:EN-US'>20 </span><span lang=EN-US style='font-size:
+14.0pt;mso-bidi-font-size:7.5pt;mso-fareast-font-family:SimSun;color:#003333;
+mso-ansi-language:EN-US'>August 4</span><span lang=EN-US style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";mso-ansi-language:
+EN-US'>
+    <o:p></o:p>
+    </span></p>
+  <p class=MsoNormal align=center style='mso-margin-top-alt:auto;margin-right:
+2.0cm;mso-margin-bottom-alt:auto;margin-left:2.0cm;text-align:center'><span
+lang=EN-US style='mso-fareast-font-family:SimSun;mso-ansi-language:EN-US'>
+    <o:p>&nbsp;</o:p>
+    </span></p>
+  <p align=center style='margin-top:5.0pt;margin-right:2.0cm;margin-bottom:5.0pt;
+margin-left:2.0cm;text-align:center'><span lang=EN-US style='font-family:"Arial",sans-serif;
+mso-ansi-language:EN-US'>&nbsp;
+    <o:p></o:p>
+    </span></p>
 </div>
-<div id="submission" class="section-7 w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny">
-  <div id="awards" class="w-container">
-    <div>
-      <h2 class="heading-12">Submission</h2>
-      <div class="text-block-15">
-        <p>All submissions will be handled electronically via the workshop’s CMT Website.  Click the following link to go to the submission site: <a href="https://cmt3.research.microsoft.com/EDLCV2020/" class="newfont">https://cmt3.research.microsoft.com/EDLCV2020/</a></p>
-        <p>Papers should describe original and unpublished work about the related topics. Each paper will receive double blind reviews, moderated by the workshop chairs. Authors should take into account the following:</p>
-        <ul>
-          <li>All papers must be written and presented in English.</li>
-          <li>All papers must be submitted in PDF format. The workshop paper format guidelines are the same as the <a href="http://cvpr2020.thecvf.com/submission/main-conference/author-guidelines#submission-guidelines" class="newfont">Main Conference papers</a></li>
-          <li>The maximum paper length is 8 pages (excluding references). Note that shorter submissions are also welcome.</li>
-          <li>The accepted papers will be published in CVF open access as well as in IEEE Xplore.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="submission2" class="section-7">
-  <div id="awards" class="w-container">
-    <div>
-      <h2 class="heading-12">Submission</h2>
-      <div class="text-block-15">
-        <p>All submissions will be handled electronically via the workshop’s CMT Website.  Click the following link to go to the submission site: <a href="https://cmt3.research.microsoft.com/EDLCV2020/" class="newfont">https://cmt3.research.microsoft.com/EDLCV2020/</a></p>
-        <p>Papers should describe original and unpublished work about the related topics. Each paper will receive double blind reviews, moderated by the workshop chairs. Authors should take into account the following:</p>
-        <ul>
-          <li>All papers must be written and presented in English.</li>
-          <li>All papers must be submitted in PDF format. The workshop paper format guidelines are the same as the <a href="http://cvpr2020.thecvf.com/submission/main-conference/author-guidelines#submission-guidelines" class="newfont">Main Conference papers</a></li>
-          <li>The maximum paper length is 8 pages (excluding references). Note that shorter submissions are also welcome.</li>
-          <li>The accepted papers will be published in CVF open access as well as in IEEE Xplore.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="organizers" class="section">
-  <div class="w-container">
-    <h2 class="heading-13">Organizers</h2>
-    <div class="row-4 w-row">
-      <table>
-        <tr>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="http://www.ee.oulu.fi/~lili/LiLiuHomepage.html" class="w-inline-block"><img src="pictures/li.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Li Liu<br/>
-            University of Oulu &amp; NUDT</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://homes.esat.kuleuven.be/~yliu/" class="w-inline-block"><img src="pictures/yuliu.png" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Yu Liu<br/>
-            PSI group of KU Leuven</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://wlouyang.github.io/" class="w-inline-block"><img src="pictures/wanli.png" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Wanli Ouyang<br/>
-            Univeristy of Sydney</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="http://ivg.au.tsinghua.edu.cn/Jiwen_Lu/" class="w-inline-block"><img src="pictures/jiwen.png" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Jiwen Lu<br/>
-            Tsinghua University</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://scholar.google.com/citations?user=bjEpXBoAAAAJ&amp;hl=en" class="w-inline-block"><img src="pictures/matti.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Prof. Matti Pietikäinen<br/>
-            University of Oulu</h1>
-          </a>
-          </td>
-        </tr>
-        <tr>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://www.vision.ee.ethz.ch/en/members/get_member.cgi?id=1" class="w-inline-block"><img src="pictures/luc.png" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Prof. Luc Van Gool<br/>
-            ETH Zurich</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://research.fb.com/people/vajda-peter/" class="w-inline-block"><img src="pictures/peter.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Peter Vajda<br/>
-            Research Scientist Manager <br/>
-            at Facebook</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://research.fb.com/people/zhang-peizhao/" class="w-inline-block"><img src="pictures/zhang.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Peizhao Zhang<br/>
-            Research Scientist <br/>
-            at Facebook</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://research.fb.com/people/zhang-peizhao/" class="w-inline-block"><img src="pictures/pete.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Pete Warden<br/>
-            Staff Research Engineer <br/>
-            at Google</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://people.eecs.berkeley.edu/~keutzer/" class="w-inline-block"><img src="pictures/kurt.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Prof. Kurt Keutzer<br/>
-            UC Berkeley</h1>
-          </a>
-          </td>
-        </tr>
-        <tr>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://www.jonathandekhtiar.eu/" class="w-inline-block"><img src="pictures/jonathan.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Jonathan Dekhtiar<br/>
-            Deep Learning Engineer <br/>
-            at Nvidia</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="http://iphome.hhi.de/samek/" class="w-inline-block"><img src="pictures/wojciech.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Wojciech Samek<br/>
-            Fraunhofer Heinrich Hertz Institute</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://eiclab.net/" class="w-inline-block"><img src="pictures/lin.png" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Yingyan Lin<br/>
-            Rice University</h1>
-          </a>
-          </td>
-          <td align="center" valign="top" width="200" height="250" valign="top">
-          <a href="https://www.joanneum.at/digital/das-institut/team/detail/employee/bailer/" class="w-inline-block"><img src="pictures/werner.jpg" width="64" alt="" class="person"/>
-          <h1 class="heading-2">Dr. Werner Bailer<br/>
-            Joanneum Research</h1>
-          </a>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>
-<div id="awards" class="section footer w-hidden-main w-hidden-medium">
-  <div id="awards" class="container-2 w-container">
-    <h2 class="heading-5">Previous EDLCV Workshop</h2>
-    <div class="text-block-2 link">
-      <ul>
-        <li> <a href="http://www.ee.oulu.fi/~lili/CEFRLatICCV2019.html" class="newfont">4<sup>th</sup> CEFRL Workshop in conjunction with ICCV 2019</a></li>
-        <li> <a href="http://www.ee.oulu.fi/~lili/CEFRLatCVPR2019.html" class="newfont">3<sup>rd</sup> CEFRL Workshop in conjunction with CVPR 2019</a></li>
-        <li> <a href="https://cefrl.webflow.io/" class="newfont">2<sup>nd</sup> CEFRL Workshop in conjunction with ECCV 2018</a></li>
-        <li> <a href="http://www.ee.oulu.fi/~lili/ICCVW2017.html" class="newfont">1<sup>st</sup> CEFRL Workshop in conjunction with ICCV 2017</a></li>
-        <li><a href="https://icml.cc/Conferences/2019/Schedule?showEvent=3520" class="newfont">ICML 2019: Joint Workshop on On-Device Machine Learning and Compact Deep Neural Network Representations (ODML-CDNNR)</a></li>
-        <li> <a href="https://nips.cc/Conferences/2018/Schedule?showEvent=10941" class="newfont">NIPS 2018: workshop on Compact Deep Neural Networks with industrial applications</a></li>
-        <li><a href="https://sites.google.com/view/ecv2019/" class="newfont">2<sup>nd</sup> Efficient Deep Learning for Computer Vision
-          in conjunction with CVPR 2019</a></li>
-        <li><a href="https://sites.google.com/view/ecv2018/" class="newfont">1<sup>st</sup> Efficient Deep Learning for Computer Vision
-          in conjunction with CVPR 2018</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-<div id="awards2" class="section footer w-hidden-small w-hidden-tiny">
-  <div id="awards" class="w-container">
-    <div class="w-container">
-      <h2 class="heading-5">Previous EDLCV Workshop</h2>
-      <div class="text-block-2 link">
-        <ul>
-          <li> <a href="http://www.ee.oulu.fi/~lili/CEFRLatICCV2019.html" class="newfont">4<sup>th</sup> CEFRL Workshop in conjunction with ICCV 2019</a></li>
-          <li> <a href="http://www.ee.oulu.fi/~lili/CEFRLatCVPR2019.html" class="newfont">3<sup>rd</sup> CEFRL Workshop in conjunction with CVPR 2019</a></li>
-          <li> <a href="https://cefrl.webflow.io/" class="newfont">2<sup>nd</sup> CEFRL Workshop in conjunction with ECCV 2018</a></li>
-          <li> <a href="http://www.ee.oulu.fi/~lili/ICCVW2017.html" class="newfont">1<sup>st</sup> CEFRL Workshop in conjunction with ICCV 2017</a></li>
-          <li><a href="https://icml.cc/Conferences/2019/Schedule?showEvent=3520" class="newfont">ICML 2019: Joint Workshop on On-Device Machine Learning and Compact Deep Neural Network Representations (ODML-CDNNR)</a></li>
-          <li> <a href="https://nips.cc/Conferences/2018/Schedule?showEvent=10941" class="newfont">NIPS 2018: workshop on Compact Deep Neural Networks with industrial applications</a></li>
-          <li><a href="https://sites.google.com/view/ecv2019/" class="newfont">2<sup>nd</sup> Efficient Deep Learning for Computer Vision
-            in conjunction with CVPR 2019</a></li>
-          <li><a href="https://sites.google.com/view/ecv2018/" class="newfont">1<sup>st</sup> Efficient Deep Learning for Computer Vision
-            in conjunction with CVPR 2018</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="section-6 w-hidden-small w-hidden-tiny">
-<div class="w-container">
-  <div>
-    <h2 class="heading-7" align="center">Main Contacts</h2>
-    <div class="newfontsize">If you have question, please contact : </br>
-      </br>
-      <ul>
-        <li><strong><em>Dr. Li Liu</em></strong> : li.liu@oulu.fi</li>
-        </br>
-        <li><strong><em >Dr. Peter Vajda</em></strong> : vajdap@fb.com </li>
-        </br>
-        <li><strong><em>Dr. Werner Bailer</em></strong> : werner.bailer@joanneum.at</li>
-      </ul>
-      </br>
-    </div>
-  </div>
-</div>
-<div class="section-6 w-hidden-main w-hidden-medium">
-  <div class="w-container">
-    <div class="div-block">
-      <h2 class="heading-7" align="center">Main Contacts</h2>
-      <div class="newfontsize">If you have question, please contact : </br>
-        </br>
-        <ul>
-          <li><strong><em>Dr. Li Liu</em></strong> : li.liu@oulu.fi</li>
-          </br>
-          <li><strong><em >Dr. Peter Vajda</em></strong> : vajdap@fb.com </li>
-          </br>
-          <li><strong><em>Dr. Werner Bailer</em></strong> : werner.bailer@joanneum.at</li>
-        </ul>
-        </br>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="section footer">
-  <div class="w-container">
-    <div class="w-row">
-      <div class="w-col w-col-3">
-        <div class="logo-text footer">EDLCV 2020</div>
-        <div class="social-icon-group"> <a href="#" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/5abe7e9055d981785ad0393e/5abe7e9055d981965fd03963_facebook-icon.svg" alt=""/></a> <a href="#" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/5abe7e9055d981785ad0393e/5abe7e9055d981167bd03965_twitter-icon.svg" alt=""/></a> <a href="#" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/5abe7e9055d981785ad0393e/5abe7e9055d98147a9d03966_linkdin-icon-white.svg" alt=""/></a> <a href="#" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/5abe7e9055d981785ad0393e/5abe7e9055d981a51dd0395b_email-icon-white.svg" alt=""/></a> </div>
-      </div>
-      <div class="w-col w-col-9"></div>
-    </div>
-  </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><script src="https://uploads-ssl.webflow.com/5abe7e9055d981785ad0393e/js/webflow.2e96abf72.js" type="text/javascript"></script><!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>
